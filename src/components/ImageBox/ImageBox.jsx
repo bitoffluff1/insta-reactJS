@@ -1,8 +1,13 @@
 import './ImageBox.scss';
 
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
+import {Likes} from '../Likes'
+import {Comments} from '../Comments'
 
 export class ImageBox extends Component {
+
     render() {
         const {image, likes, comments} = this.props;
         return (
@@ -11,15 +16,17 @@ export class ImageBox extends Component {
                      className="gallery-image" alt=""/>
                 <div className="gallery-item-info">
                     <ul>
-                        <li className="gallery-item-likes"><span className="visually-hidden">Likes:</span><i
-                            className="fas fa-heart"
-                            aria-hidden="true"></i>{likes}</li>
-                        <li className="gallery-item-comments"><span className="visually-hidden">Comments:</span><i
-                            className="fas fa-comment"
-                            aria-hidden="true"></i>{comments}</li>
+                        <Likes likes={likes}/>
+                        <Comments comments={comments}/>
                     </ul>
                 </div>
             </div>
         );
     }
 }
+
+ImageBox.propTypes ={
+    image: PropTypes.string,
+    likes: PropTypes.number,
+    comments: PropTypes.number,
+};

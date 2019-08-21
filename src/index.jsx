@@ -3,19 +3,25 @@ import './assets/global.scss';
 import React, {Component} from 'react';
 import ReactDom from 'react-dom';
 
-import {ImageBox} from "./components/ImageBox";
-import {pictures} from "./pictures";
+import {Profile} from "./components/Profile";
+import {Gallery} from "./components/Gallery";
 
 class App extends Component {
     render() {
         return (
-            <main>
-                <div className="container">
-                    <div className="gallery">
-                        {pictures.map((picture, idx) => <ImageBox key={idx} {...picture}/>)}
+            <div>
+                <header>
+                    <div className="container">
+                        <Profile/>
                     </div>
-                </div>
-            </main>
+                </header>
+                <main>
+                    <div className="container">
+                        <Gallery/>
+                    </div>
+                </main>
+            </div>
+
         );
     }
 }
