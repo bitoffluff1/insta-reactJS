@@ -1,0 +1,23 @@
+@import "../../assets/base";
+
+.load-wrapp {
+  text-align: center;
+}
+
+.line {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  background-color: $darkColor;
+}
+
+.load-8 .line {
+  animation: loadingH 2s cubic-bezier(.17, .37, .43, .67) infinite;
+}
+
+@keyframes loadingH {
+  0% {width: 15px;}
+  50% {width: 80px; padding: 8px;}
+  100% {width: 15px;}
+}
