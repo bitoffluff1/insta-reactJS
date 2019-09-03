@@ -7,12 +7,20 @@ import {Loading} from "../Loading";
 
 
 export class Gallery extends Component {
-    state = {pictures: []};
+    state = {
+        pictures: [],
+        page: 1,
+        limit: 6
+    };
 
     componentDidMount() {
-        const {token} = this.props;
+        window.addEventListener('scroll', this.handleScroll);
 
-        fetch("http://localhost:8888/api/photos", {
+        const {token} = this.props;
+        const {page, limit} = this.state;
+
+
+        fetch(`http://localhost:8888/api/photos?page=${page}&limit=${limit}`, {
             headers: {
                 "Content-type": "application/json",
                 "authorization": `Bearer ${token}`,
@@ -29,6 +37,38 @@ export class Gallery extends Component {
                 })
             })
     }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll = () => {
+        const {page, limit} = this.state;
+        const {token} = this.props;
+
+        let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;
+
+        if (windowRelativeBottom < document.documentElement.clientHeight + 100) {
+            fetch(`http://localhost:8888/api/photos?page=${page + 1}&limit=${limit + 6}`, {
+                headers: {
+                    "Content-type": "application/json",
+                    "authorization": `Bearer ${token}`,
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    this.setState({
+                        pictures: data.photos.map(photo => ({
+                            image: photo.image,
+                            likes: photo.likes.length,
+                            comments: photo.comments.length
+                        })),
+                        page: page + 1,
+                        limit: limit + 6,
+                    })
+                })
+        }
+    };
 
     render() {
         const {pictures} = this.state;

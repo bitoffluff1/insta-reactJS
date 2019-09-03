@@ -6,8 +6,8 @@ export class Auth extends Component {
     //Forest.VonRueden@yahoo.com
     //qwerty
     state = {
-        username: "",
-        password: "",
+        username: "Forest.VonRueden@yahoo.com",
+        password: "qwerty",
         classNameUsername: "effect",
         classNamePassword: "effect"
     };

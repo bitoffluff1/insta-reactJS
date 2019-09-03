@@ -58,7 +58,7 @@ app.get('/api/photos', async (req, res) => {
             'comments.user',
             'likes.user',
             'owner'
-        ]).skip(limit * (page - 1)).limit(limit);
+        ]).skip(limit * (page - 1)).limit(+limit);
     const total = await Picture.countDocuments();
     res.json({
         page,
