@@ -10,7 +10,8 @@ export class Gallery extends Component {
     state = {
         pictures: [],
         page: 1,
-        limit: 6
+        limit: 6,
+        inProgress: false
     };
 
     componentDidMount() {
@@ -18,7 +19,6 @@ export class Gallery extends Component {
 
         const {token} = this.props;
         const {page, limit} = this.state;
-
 
         fetch(`http://localhost:8888/api/photos?page=${page}&limit=${limit}`, {
             headers: {
@@ -43,13 +43,17 @@ export class Gallery extends Component {
     }
 
     handleScroll = () => {
-        const {page, limit} = this.state;
+        const {page, limit, inProgress} = this.state;
         const {token} = this.props;
 
-        let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.body.clientHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        if (windowRelativeBottom < document.documentElement.clientHeight + 100) {
-            fetch(`http://localhost:8888/api/photos?page=${page + 1}&limit=${limit + 6}`, {
+        if (windowHeight + scrollTop >= documentHeight && !inProgress) {
+            this.setState({inProgress: true});
+
+            fetch(`http://localhost:8888/api/photos?page=${page + 1}&limit=${limit}`, {
                 headers: {
                     "Content-type": "application/json",
                     "authorization": `Bearer ${token}`,
@@ -57,16 +61,20 @@ export class Gallery extends Component {
             })
                 .then(response => response.json())
                 .then(data => {
-                    this.setState({
-                        pictures: data.photos.map(photo => ({
-                            image: photo.image,
-                            likes: photo.likes.length,
-                            comments: photo.comments.length
-                        })),
-                        page: page + 1,
-                        limit: limit + 6,
-                    })
-                })
+                    let newPictures = data.photos.map(photo => ({
+                        image: photo.image,
+                        likes: photo.likes.length,
+                        comments: photo.comments.length
+                    }));
+
+                    this.setState(prevState => {
+                        return {
+                            pictures: prevState.pictures.concat(newPictures),
+                            page: prevState.page + 1,
+                            inProgress: false,
+                        }
+                    });
+                });
         }
     };
 

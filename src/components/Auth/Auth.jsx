@@ -3,10 +3,8 @@ import './Auth.scss';
 import React, {Component} from 'react';
 
 export class Auth extends Component {
-    //Forest.VonRueden@yahoo.com
-    //qwerty
     state = {
-        username: "Forest.VonRueden@yahoo.com",
+        username: "Clinton_Kuvalis72@yahoo.com",
         password: "qwerty",
         classNameUsername: "effect",
         classNamePassword: "effect"
@@ -46,7 +44,6 @@ export class Auth extends Component {
         })
     };
 
-
     render() {
         const {username, password, classNameUsername, classNamePassword} = this.state;
 
@@ -70,4 +67,3 @@ export class Auth extends Component {
         );
     }
 }
-
