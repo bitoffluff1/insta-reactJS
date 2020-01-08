@@ -1,13 +1,12 @@
 import './ImageBox.scss';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import {Likes} from '../Likes'
-import {Comments} from '../Comments'
+import { Likes } from '../Likes'
+import { Comments } from '../Comments'
 
 export class ImageBox extends Component {
-
     render() {
         const {image, likes, comments} = this.props;
         return (

@@ -3,17 +3,19 @@ import './assets/global.scss';
 import React, {Component, Fragment} from 'react';
 import ReactDom from 'react-dom';
 
-import {Profile} from "./components/Profile";
-import {Gallery} from "./components/Gallery";
-import {Auth} from "./components/Auth";
+import {Profile} from 'components/Profile';
+import {GalleryContainer} from 'containers/GalleryContainer';
+import {Auth} from 'components/Auth';
+import {Modal} from 'components/Modal';
 
-import {Counter} from "./components/Counter";
-import {Timer} from "./components/Timer";
+import {Counter} from 'components/Counter';
+import {Timer} from 'components/Timer';
 
 class App extends Component {
     state = {
         visible: false,
         token: null,
+        isModalVisible: false,
     };
 
     handleToggleClick = () => {
@@ -24,8 +26,20 @@ class App extends Component {
         this.setState({token});
     };
 
+    handleSignOut = (event) => {
+        event.preventDefault();
+
+        this.setState({token: ''});
+    };
+
+    handleModalClose = () => {
+        this.setState({
+            isModalVisible: false,
+        });
+    };
+
     render() {
-        const {visible, token} = this.state;
+        const {visible, token, isModalVisible} = this.state;
 
         return (
             <Fragment>
@@ -35,7 +49,9 @@ class App extends Component {
                 {visible && <Timer/>}
                 <Counter/>
 
-                {token && <Fragment>
+                {token && <div>
+                    <button onClick={this.handleSignOut}>Sign Out</button>
+
                     <header>
                         <div className="container">
                             <Profile/>
@@ -43,12 +59,17 @@ class App extends Component {
                     </header>
                     <main>
                         <div className="container">
-                            <Gallery token={token}/>
+                            <GalleryContainer token={token}/>
                         </div>
                     </main>
-                </Fragment>}
+                    {isModalVisible && <Modal title='It is modal' visible onClose={this.handleModalClose}>
+                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto assumenda cumque
+                            debitis dolor dolorum id repellat similique suscipit ullam voluptatem? Ab amet animi atque
+                            praesentium quas reiciendis sit ullam voluptate.
+                        </div>
+                    </Modal>}
+                </div>}
             </Fragment>
-
         );
     }
 }

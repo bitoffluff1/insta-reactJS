@@ -1,16 +1,13 @@
 import './Loading.scss';
 
-import React, {Component} from 'react';
+import React from 'react';
 
-export class Loading extends Component {
-    render() {
-        return (
-            <div className="load-wrapp">
-                <div className="load-8">
-                    <div className="line"></div>
-                </div>
+export function Loading() {
+    return (
+        <div className="load-wrapp">
+            <div className="load-8">
+                <div className="line"/>
             </div>
-        );
-    }
+        </div>
+    );
 }
-

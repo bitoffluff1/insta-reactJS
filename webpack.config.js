@@ -8,8 +8,13 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.[chunkhash].js',
     },
-    resolve:{
-      extensions: ['.js', '.jsx'],
+    resolve: {
+        extensions: ['.js', '.jsx'],
+        alias: {
+            assets: path.resolve(__dirname, 'src', 'assets'),
+            components: path.resolve(__dirname, 'src', 'components'),
+            containers: path.resolve(__dirname, 'src', 'containers'),
+        }
     },
     module: {
         rules: [
@@ -22,7 +27,7 @@ module.exports = {
             },
             {
                 test: /\.s?css$/,
-                use:[
+                use: [
                     'style-loader',
                     MiniCssExtractLoader.loader,
                     'css-loader',
@@ -40,5 +45,4 @@ module.exports = {
             filename: 'index.html'
         })
     ]
-
 };

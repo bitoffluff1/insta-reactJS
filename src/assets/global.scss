@@ -17,6 +17,10 @@ body {
   padding-bottom: 3rem;
 }
 
+main {
+  position: relative;
+}
+
 img {
   display: block;
 }
@@ -34,4 +38,3 @@ img {
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
 }
-
