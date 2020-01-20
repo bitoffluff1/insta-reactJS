@@ -62,7 +62,7 @@ class App extends Component {
                             <GalleryContainer token={token}/>
                         </div>
                     </main>
-                    {isModalVisible && <Modal title='It is modal' visible onClose={this.handleModalClose}>
+                    {isModalVisible && <Modal title='It is modal' onClose={this.handleModalClose}>
                         <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto assumenda cumque
                             debitis dolor dolorum id repellat similique suscipit ullam voluptatem? Ab amet animi atque
                             praesentium quas reiciendis sit ullam voluptate.

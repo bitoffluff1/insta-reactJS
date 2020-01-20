@@ -24,8 +24,8 @@ export class GalleryContainer extends Component {
 
         fetch(`http://localhost:8888/api/photos?page=${page}&limit=${limit}`, {
             headers: {
-                "Content-type": "application/json",
-                "authorization": `Bearer ${token}`,
+                'Content-type': 'application/json',
+                'authorization': `Bearer ${token}`,
             }
         })
             .then(response => response.json())
@@ -66,7 +66,13 @@ export class GalleryContainer extends Component {
 
         return (
             <Fragment>
-                {pictures.length > 0 && <Gallery onScroll={this.handleScroll} pictures={ pictures }/>}
+                {pictures.length > 0
+                    && <Gallery
+                        onScroll={this.handleScroll}
+                        pictures={ pictures }
+                        token={this.props.token}
+                    />
+                }
                 {loading && <Loading />}
             </Fragment>
         );

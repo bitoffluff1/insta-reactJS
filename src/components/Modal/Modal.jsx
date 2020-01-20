@@ -1,6 +1,6 @@
 import './Modal.scss';
 
-import React, { Component } from 'react';
+import React, { Component, Fragment  } from 'react';
 import ReactDom from 'react-dom';
 
 const modalRoot = document.getElementById('modal');
@@ -28,16 +28,26 @@ export class Modal extends Component {
         }
     };
 
-    renderView = () => {
+    renderModalDefault = () => {
         const { title, children } = this.props;
+
+        return (
+            <Fragment>
+                <h3>{title}</h3>
+                <div className="modal-body">
+                    {children}
+                </div>
+            </Fragment>
+        );
+    };
+
+    renderView = () => {
+        const { renderModal } = this.props;
 
         return (
             <div className="overlay" onClick={this.onClose}>
                 <div className="modal">
-                    <h3>{title}</h3>
-                    <div className="modal-body">
-                        {children}
-                    </div>
+                    {renderModal ? renderModal() : this.renderModalDefault()}
                 </div>
             </div>
         );

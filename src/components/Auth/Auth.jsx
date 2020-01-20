@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 
 export class Auth extends Component {
     state = {
-        username: "Clinton_Kuvalis72@yahoo.com",
+        username: "Wilma87@gmail.com",
         password: "qwerty",
         classNameUsername: "effect",
         classNamePassword: "effect"

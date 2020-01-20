@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import { ImageBox } from "../ImageBox";
 
 export function Gallery(props) {
-    const { pictures, renderItem, onScroll } = props;
+    const { pictures, renderItem, onScroll, token } = props;
 
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) {
@@ -25,7 +25,7 @@ export function Gallery(props) {
 
     const renderItemDefault = (picture) => {
         return (
-            <ImageBox key={picture.id} {...picture}/>
+            <ImageBox key={picture.id} {...picture} token={token}/>
         );
     };
 
