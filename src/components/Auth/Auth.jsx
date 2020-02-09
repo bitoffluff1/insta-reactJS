@@ -2,6 +2,8 @@ import './Auth.scss';
 
 import React, { Component } from 'react';
 
+import { InputAuth } from 'components/InputAuth';
+
 export class Auth extends Component {
     state = {
         username: 'Wilma87@gmail.com',
@@ -34,15 +36,8 @@ export class Auth extends Component {
     };
 
     handleTextChange = ({target: {name, value}}) => {
-        let newName = "";
-        let nameState = "";
-        if(name === "username"){
-            newName = (value) ? "effect has-content" : "effect";
-            nameState = "classNameUsername";
-        } else if (name === "password"){
-            newName = (value) ? "effect has-content" : "effect";
-            nameState = "classNamePassword";
-        }
+        const nameState = name === 'username' ? 'classNameUsername' : 'classNamePassword';
+        const newName = value ? 'effect has-content' : 'effect';
 
         this.setState({
             [name]: value,
@@ -56,18 +51,20 @@ export class Auth extends Component {
         return (
             <div className="container auth-box">
                 <h2>Sign In</h2>
-                <div className="col-3 input-effect">
-                    <input className={classNameUsername} type="text" name="username" value={username}
-                           onChange={this.handleTextChange}/>
-                    <label>Username</label>
-                    <span className="focus-border" />
-                </div>
-                <div className="col-3 input-effect">
-                    <input className={classNamePassword} type="text" name="password" value={password}
-                           onChange={this.handleTextChange}/>
-                    <label>Password</label>
-                    <span className="focus-border" />
-                </div>
+                <InputAuth
+                    className={classNameUsername}
+                    name='username'
+                    value={username}
+                    handleTextChange={this.handleTextChange}
+                    label='Username'
+                />
+                <InputAuth
+                    className={classNamePassword}
+                    name='password'
+                    value={password}
+                    handleTextChange={this.handleTextChange}
+                    label='Password'
+                />
                 <button className="button-send" onClick={this.handleSignIn}>Sign In</button>
             </div>
         );

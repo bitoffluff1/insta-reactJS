@@ -8,23 +8,9 @@ import { Auth } from 'components/Auth';
 import { Main } from 'components/Main';
 
 class App extends Component {
-    state = {
-        token: localStorage.getItem('token'),
-    };
-
-    handleSignOut = (event) => {
-        this.setState({ token: '' }, () => {
-            localStorage.setItem('token', null);
-        });
-        event.preventDefault();
-    };
-
     render() {
-        const {token} = this.state;
-
         return (
             <Fragment>
-                {token && <button onClick={this.handleSignOut}>Sign Out</button>}
                 <Link to='/'>Home</Link>
                 <Link to='/auth'>Auth</Link>
 

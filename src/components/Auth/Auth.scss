@@ -30,67 +30,6 @@ h2:before {
   margin-left: -50px;
 }
 
-
-:focus {
-  outline: none;
-}
-
-.col-3 {
-  width: 27.33%;
-  margin: 15px 3%;
-  position: relative;
-}
-
-input[type="text"] {
-  font: 15px/24px "Lato", Arial, sans-serif;
-  color: #333;
-  width: 100%;
-  box-sizing: border-box;
-  letter-spacing: 1px;
-}
-
-.effect {
-  border: 0;
-  padding: 4px 0;
-  border-bottom: 1px solid #ccc;
-  background-color: transparent;
-}
-
-.effect ~ .focus-border {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background-color: $mainColor;
-  transition: 0.4s;
-}
-
-.effect:focus ~ .focus-border,
-.has-content.effect ~ .focus-border {
-  width: 100%;
-  transition: 0.4s;
-  left: 0;
-}
-
-.effect ~ label {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  top: 9px;
-  color: #aaa;
-  transition: 0.3s;
-  z-index: -1;
-  letter-spacing: 0.5px;
-}
-
-.effect :focus ~ label, .has-content.effect ~ label {
-  top: -16px;
-  font-size: 12px;
-  color: $mainColor;
-  transition: 0.3s;
-}
-
 .button-send {
   display: inline-block;
   color: $mainColor;
