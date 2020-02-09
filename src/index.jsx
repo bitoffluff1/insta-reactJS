@@ -1,77 +1,45 @@
 import './assets/global.scss';
 
-import React, {Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactDom from 'react-dom';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
-import {Profile} from 'components/Profile';
-import {GalleryContainer} from 'containers/GalleryContainer';
-import {Auth} from 'components/Auth';
-import {Modal} from 'components/Modal';
-
-import {Counter} from 'components/Counter';
-import {Timer} from 'components/Timer';
+import { Auth } from 'components/Auth';
+import { Main } from 'components/Main';
 
 class App extends Component {
     state = {
-        visible: false,
-        token: null,
-        isModalVisible: false,
-    };
-
-    handleToggleClick = () => {
-        this.setState(prevState => ({visible: !prevState.visible}))
-    };
-
-    handleSuccess = (token) => {
-        this.setState({token});
+        token: localStorage.getItem('token'),
     };
 
     handleSignOut = (event) => {
-        event.preventDefault();
-
-        this.setState({token: ''});
-    };
-
-    handleModalClose = () => {
-        this.setState({
-            isModalVisible: false,
+        this.setState({ token: '' }, () => {
+            localStorage.setItem('token', null);
         });
+        event.preventDefault();
     };
 
     render() {
-        const {visible, token, isModalVisible} = this.state;
+        const {token} = this.state;
 
         return (
             <Fragment>
-                {!token && <Auth onSuccess={this.handleSuccess}/>}
+                {token && <button onClick={this.handleSignOut}>Sign Out</button>}
+                <Link to='/'>Home</Link>
+                <Link to='/auth'>Auth</Link>
 
-                <button onClick={this.handleToggleClick}>Toggle</button>
-                {visible && <Timer/>}
-                <Counter/>
-
-                {token && <div>
-                    <button onClick={this.handleSignOut}>Sign Out</button>
-
-                    <header>
-                        <div className="container">
-                            <Profile/>
-                        </div>
-                    </header>
-                    <main>
-                        <div className="container">
-                            <GalleryContainer token={token}/>
-                        </div>
-                    </main>
-                    {isModalVisible && <Modal title='It is modal' onClose={this.handleModalClose}>
-                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto assumenda cumque
-                            debitis dolor dolorum id repellat similique suscipit ullam voluptatem? Ab amet animi atque
-                            praesentium quas reiciendis sit ullam voluptate.
-                        </div>
-                    </Modal>}
-                </div>}
+                <Switch>
+                    <Route path='/' component={Main} exact />
+                    <Route path='/auth' component={Auth} exact />
+                </Switch>
             </Fragment>
         );
     }
 }
 
-ReactDom.render(<App/>, document.getElementById('root'));
+ReactDom.render(
+    <BrowserRouter>
+        <App/>
+    </BrowserRouter>,
+    document.getElementById('root'),
+);

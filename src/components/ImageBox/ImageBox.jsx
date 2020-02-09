@@ -15,12 +15,12 @@ export class ImageBox extends Component {
     };
 
     handleModalOpen = () => {
-        const { token, id } = this.props;
+        const { id } = this.props;
 
         fetch(`http://localhost:8888/api/photos/${id}`, {
           headers: {
               'Content-type': 'application/json',
-              'authorization': `Bearer ${token}`,
+              'authorization': `Bearer ${localStorage.getItem('token')}`,
           }
         })
             .then(response => response.json())
@@ -45,11 +45,12 @@ export class ImageBox extends Component {
     };
 
     renderModal = () => {
+        const { image } = this.state;
         // id, image, owner, likes [timestamp, id, user], comments [timestamp, id, user, text]
         return (
             <div className="modal__content">
                 <div className="modal__image">
-                    <img className="modal__image" src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces"
+                    <img className="modal__image" src={image}
                          alt="avatar"/>
                 </div>
 
@@ -77,11 +78,11 @@ export class ImageBox extends Component {
                     <div className="modal__footer">
                         <div className="modal__control">
                             <div className="modal__control_left">
-                                <i className="far fa-heart"></i>
-                                <i className="far fa-comment"></i>
-                                <i className="far fa-paper-plane"></i>
+                                <i className="far fa-heart" />
+                                <i className="far fa-comment" />
+                                <i className="far fa-paper-plane" />
                             </div>
-                            <i className="far fa-bookmark"></i>
+                            <i className="far fa-bookmark" />
                         </div>
                         <div className="likes padding-w padding-h">
                             <p className="text">Нравится 15</p>

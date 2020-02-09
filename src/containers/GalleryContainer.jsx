@@ -1,23 +1,26 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
-import { Gallery } from "components/Gallery";
-import { Loading } from "components/Loading";
+import { Gallery } from 'components/Gallery';
+import { Loading } from 'components/Loading';
 
 export class GalleryContainer extends Component {
     state = {
         pictures: [],
         page: 1,
-        limit: 6,
+        limit: 9,
         loading: false,
         total: null,
     };
 
     componentDidMount() {
+        if(!localStorage.getItem('token') || localStorage.getItem('token') === 'null') {
+            return this.props.history.replace('/auth');
+        }
+
         this.loadItems();
     }
 
     loadItems = () => {
-        const {token} = this.props;
         const {page, limit} = this.state;
 
         this.setState({ loading: true });
@@ -25,7 +28,7 @@ export class GalleryContainer extends Component {
         fetch(`http://localhost:8888/api/photos?page=${page}&limit=${limit}`, {
             headers: {
                 'Content-type': 'application/json',
-                'authorization': `Bearer ${token}`,
+                'authorization': `Bearer ${localStorage.getItem('token')}`,
             }
         })
             .then(response => response.json())
@@ -65,16 +68,15 @@ export class GalleryContainer extends Component {
         const { loading, pictures } = this.state;
 
         return (
-            <Fragment>
+            <main>
                 {pictures.length > 0
                     && <Gallery
-                        onScroll={this.handleScroll}
-                        pictures={ pictures }
-                        token={this.props.token}
-                    />
+                            onScroll={this.handleScroll}
+                            pictures={ pictures }
+                        />
                 }
                 {loading && <Loading />}
-            </Fragment>
+            </main>
         );
     }
 }

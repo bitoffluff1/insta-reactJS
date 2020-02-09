@@ -10,12 +10,12 @@ import {ProfileBio} from '../ProfileBio';
 export class Profile extends Component {
     render() {
         return (
-            <div className="profile">
+            <header className="profile">
                 <ProfileImage/>
                 <ProfileUserSettings/>
                 <ProfileStatus/>
                 <ProfileBio/>
-            </div>
+            </header>
         );
     }
 }
