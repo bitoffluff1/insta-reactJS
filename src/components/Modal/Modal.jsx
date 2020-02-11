@@ -29,11 +29,10 @@ export class Modal extends Component {
     };
 
     renderModalDefault = () => {
-        const { title, children } = this.props;
+        const { children } = this.props;
 
         return (
             <Fragment>
-                <h3>{title}</h3>
                 <div className="modal-body">
                     {children}
                 </div>

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import { Gallery } from 'components/Gallery';
 import { Loading } from 'components/Loading';
 
-export class GalleryContainer extends Component {
+class GalleryContainer extends Component {
     state = {
         pictures: [],
         page: 1,
@@ -21,7 +22,7 @@ export class GalleryContainer extends Component {
     }
 
     loadItems = () => {
-        const {page, limit} = this.state;
+        const { page, limit } = this.state;
 
         this.setState({ loading: true });
 
@@ -80,3 +81,5 @@ export class GalleryContainer extends Component {
         );
     }
 }
+
+export default withRouter(GalleryContainer);

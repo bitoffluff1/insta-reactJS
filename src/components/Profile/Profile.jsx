@@ -8,6 +8,7 @@ import {ProfileStatus} from '../ProfileStatus';
 import {ProfileBio} from '../ProfileBio';
 
 export class Profile extends Component {
+
     render() {
         return (
             <header className="profile">

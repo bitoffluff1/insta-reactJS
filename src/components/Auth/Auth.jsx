@@ -16,7 +16,7 @@ export class Auth extends Component {
         this.setState({ token }, () => {
             localStorage.setItem('token', token);
         });
-        this.props.history.replace('/');
+        this.props.history.replace('/posts');
     };
 
     handleSignIn = () => {

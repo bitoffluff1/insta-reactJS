@@ -13,9 +13,10 @@ class App extends Component {
             <Fragment>
                 <Link to='/'>Home</Link>
                 <Link to='/auth'>Auth</Link>
+                <Link to='/posts'>Posts</Link>
 
                 <Switch>
-                    <Route path='/' component={Main} exact />
+                    <Route path='/posts' component={Main} />
                     <Route path='/auth' component={Auth} exact />
                 </Switch>
             </Fragment>
