@@ -6,21 +6,22 @@ import { InputAuth } from 'components/InputAuth';
 
 export class Auth extends Component {
     state = {
-        username: 'Wilma87@gmail.com',
+        username: 'Theron_Kautzer95@gmail.com',
         password: 'qwerty',
         classNameUsername: 'effect',
         classNamePassword: 'effect'
     };
 
-    handleSuccess = (token) => {
-        this.setState({ token }, () => {
+    handleSuccess = (token, id) => {
+        this.setState({ token, id }, () => {
             localStorage.setItem('token', token);
+            localStorage.setItem('id', id);
         });
         this.props.history.replace('/posts');
     };
 
     handleSignIn = () => {
-        const {username, password} = this.state;
+        const { username, password } = this.state;
 
         fetch('http://localhost:8888/auth', {
             method: 'POST',
@@ -31,7 +32,7 @@ export class Auth extends Component {
         })
             .then((response) => response.json())
             .then((data) => {
-                this.handleSuccess(data.token);
+                this.handleSuccess(data.token, data.user._id);
             });
     };
 

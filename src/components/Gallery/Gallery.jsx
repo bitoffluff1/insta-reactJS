@@ -2,10 +2,10 @@ import './Gallery.scss';
 
 import React, { useEffect } from 'react';
 
-import { ImageBox } from "../ImageBox";
+import { ImageBox } from '../ImageBox';
 
 export function Gallery(props) {
-    const { pictures, renderItem, onScroll } = props;
+    const { pictures, onScroll, renderItem } = props;
 
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) {

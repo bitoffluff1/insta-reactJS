@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 
-import { Profile } from '../Profile';
 import GalleryContainer from '../../containers/GalleryContainer';
-import PostContainer from '../../containers/PostContainer';
+import PostContainer from 'containers/PostContainer';
+import ProfileContainer from 'containers/ProfileContainer';
 
 export class Main extends Component {
 
@@ -12,7 +12,7 @@ export class Main extends Component {
             <div className="container">
                 <Link to='/auth'>Sign Out</Link>
 
-                <Profile />
+                <ProfileContainer />
                 <GalleryContainer/>
 
                 <Route path='/posts/:id' component={PostContainer} />

@@ -14,12 +14,12 @@ class GalleryContainer extends Component {
     };
 
     componentDidMount() {
-        if(!localStorage.getItem('token') || localStorage.getItem('token') === 'null') {
+        if (!localStorage.getItem('token') || localStorage.getItem('token') === 'null') {
             return this.props.history.replace('/auth');
         }
 
         this.loadItems();
-    }
+    };
 
     loadItems = () => {
         const { page, limit } = this.state;
@@ -79,7 +79,7 @@ class GalleryContainer extends Component {
                 {loading && <Loading />}
             </main>
         );
-    }
+    };
 }
 
 export default withRouter(GalleryContainer);

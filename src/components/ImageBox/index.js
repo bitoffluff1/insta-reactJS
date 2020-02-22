@@ -1,1 +1,1 @@
-export {ImageBox} from './ImageBox'
+export { ImageBox } from './ImageBox';
